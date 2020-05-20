@@ -2,19 +2,21 @@
   "name": "backend-boiler",
   "version": "1.0.0",
   "description": "Backend boilerplate using node,express,graphql and apollo",
-  "main": "index.js",
+  "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon start.js -e js,graphql -inspect -r esm"
   },
   "author": "akshar",
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.13.1",
+    "apollo-server-express": "^2.13.1",
+    "cors": "^2.8.5",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
     "graphql": "^15.0.0"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
   }
 }
