@@ -1,7 +1,4 @@
-const express = require("express");
-const graphqlHTTP = require("express-graphql");
-const { buildSchema } = require("graphql");
-const app = express();
+const { ApolloServer, gql } = require("apollo-server");
 
 /* --------------------------------- Fake DB -------------------------------- */
 
@@ -17,40 +14,42 @@ const db = {
 
 /* --------------------------------- GraphQL -------------------------------- */
 
-const schema = buildSchema(
-    `type Query {
-        users:[User]
-    } 
-    type Mutation{
-        addUser(name:String! email:String!):User
+const typeDefs = gql`
+    type Query {
+        users: [User]
+        user(id: String): User
+    }
+    type Mutation {
+        addUser(name: String!, email: String!): User
     }
     type User {
-        email:String
-        id:String
-        name:String!
+        email: String
+        id: String
+        name: String!
+        message: String
     }
-    `
-);
+`;
 
-const rootValue = {
-    users: () => db.users,
-    addUser: (args) => {
-        const user = {
-            id: "1",
-            ...args,
-        };
-        db.users.push(user);
-        return user;
+const resolvers = {
+    User: {
+        message: (parent) => `Hello, ${parent.name}`,
+    },
+    Query: {
+        users: () => db.users,
+        user: (parent, args, context) =>
+            db.users.find((user) => user.id === args.id),
+    },
+    Mutation: {
+        addUser: (parent, args) => {
+            let user = {
+                id: "1",
+                ...args,
+            };
+            db.users.push(user);
+            return user;
+        },
     },
 };
+const server = new ApolloServer({ typeDefs, resolvers });
 
-app.use(
-    "/graphql",
-    graphqlHTTP({
-        schema,
-        rootValue,
-        graphiql: true,
-    })
-);
-
-app.listen(3000, () => console.log("Listening on port 3000...."));
+server.listen().then(({ url }) => console.log(url));
