@@ -1,2 +1,2 @@
-require = require("esm")(module)
-module.exports = require("./src")
+require = require("esm")(module);
+module.exports = require("./src");

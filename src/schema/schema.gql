@@ -4,9 +4,11 @@
 
 type User {
     id: ID!
-    name: String!
-    email: String!
+    name: String
+    email: String
     message: String
+    createdAt:String
+    updatedAt:String
 }
 
 #/* -------------------------------------------------------------------------- */
@@ -14,6 +16,7 @@ type User {
 #/* -------------------------------------------------------------------------- */
 
 type Query {
+    users: [User]
     user(id: String): User
 }
 
@@ -22,11 +25,13 @@ type Query {
 #/* -------------------------------------------------------------------------- */
 
 type Mutation {
-    addUser(name: String!, email: String!): User
+    signUp(name: String!, email: String!, password: String!): User
 }
+
 #/* -------------------------------------------------------------------------- */
 #/*                            GraphQL Subscriptions                           */
 #/* -------------------------------------------------------------------------- */
+
 type Subscription {
     _: String
 }

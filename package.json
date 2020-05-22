@@ -4,16 +4,18 @@
   "description": "Backend boilerplate using node,express,graphql and apollo",
   "main": "start.js",
   "scripts": {
-    "start": "nodemon start.js -e js,graphql -inspect -r esm"
+    "start": "nodemon start.js -e js,graphql,gql -inspect -r esm"
   },
   "author": "akshar",
   "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^2.13.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "graphql": "^15.0.0"
+    "graphql": "^15.0.0",
+    "mongoose": "^5.9.15"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
