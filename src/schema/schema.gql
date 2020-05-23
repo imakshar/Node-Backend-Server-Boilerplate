@@ -1,3 +1,4 @@
+directive @isAuthenticated on FIELD | FIELD_DEFINITION
 #/* -------------------------------------------------------------------------- */
 #/*                                GraphQL Types                               */
 #/* -------------------------------------------------------------------------- */
@@ -7,8 +8,8 @@ type User {
     name: String
     email: String
     message: String
-    createdAt:String
-    updatedAt:String
+    createdAt: String
+    updatedAt: String
 }
 
 #/* -------------------------------------------------------------------------- */
@@ -16,8 +17,8 @@ type User {
 #/* -------------------------------------------------------------------------- */
 
 type Query {
-    users: [User]
-    user(id: String): User
+    users: [User] @isAuthenticated
+    user(id: String): User @isAuthenticated
 }
 
 #/* -------------------------------------------------------------------------- */
@@ -26,6 +27,7 @@ type Query {
 
 type Mutation {
     signUp(name: String!, email: String!, password: String!): User
+    signIn(email: String!, password: String!): JSONObject
 }
 
 #/* -------------------------------------------------------------------------- */
@@ -33,5 +35,5 @@ type Mutation {
 #/* -------------------------------------------------------------------------- */
 
 type Subscription {
-    _: String
+    welcomeMessage: String
 }

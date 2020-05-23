@@ -1,3 +1,3 @@
 import user from "./user";
-
-export default [user];
+import subscription from "./subscription";
+export default [user, subscription];
