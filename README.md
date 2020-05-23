@@ -1,6 +1,4 @@
-# Boilerplate-Backend-Server
-
-Node-Express-GraphQL-ApolloServer with MONGO DB
+## Boilerplate Backend using Node-Express-GraphQL-ApolloServer with MONGO DB  
 
 -   with JWT authorization
 -   web socket connection for graphql subscriptions.
