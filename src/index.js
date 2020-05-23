@@ -10,7 +10,6 @@ import http from "http";
 import dotenv from "dotenv";
 dotenv.config();
 import { JSONObjectDefinition, DateTimeTypeDefinition } from "graphql-scalars";
-import { AuthenticationError } from "apollo-server-express";
 
 /* -------------------------------------------------------------------------- */
 /*                                File imports                                */
@@ -110,6 +109,7 @@ import { decodeToken, authenticateCustomFunc } from "./jwt";
             playground: process.env.NODE_ENV !== "production",
         });
 
+        // Subscriptions Setup 
         const httpServer = http.createServer(app);
         server.applyMiddleware({ app });
         server.installSubscriptionHandlers(httpServer);
@@ -120,7 +120,7 @@ import { decodeToken, authenticateCustomFunc } from "./jwt";
             console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`),
             console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
         });
-        
+
     } catch (error) {
         console.error(error);
     }
